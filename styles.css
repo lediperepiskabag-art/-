@@ -98,3 +98,23 @@ a:hover{text-decoration:underline}
 .link{font-weight:700;color:var(--accent)}
 .remove{opacity:.8;cursor:pointer;color:var(--accent)}
 .remove:hover{opacity:1;text-decoration:underline}
+.qty-control {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.qty-control button {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: var(--accent);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.qty-control span {
+  min-width: 20px;
+  text-align: center;
+}
+
