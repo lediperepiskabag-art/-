@@ -117,4 +117,22 @@ a:hover{text-decoration:underline}
   min-width: 20px;
   text-align: center;
 }
+.home-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.brand-center {
+  font-size: 1.8rem; /* збільшений розмір */
+  font-weight: 800;
+  color: var(--accent);
+  text-align: center;
+}
+
+.home-header .badge {
+  font-size: 1rem;
+}
 
