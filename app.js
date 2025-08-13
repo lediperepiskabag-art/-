@@ -182,3 +182,47 @@ document.addEventListener('DOMContentLoaded', () => {
   const selPrice = document.querySelector('#f-price');
   [selBrand, selType, selPrice].forEach(el => el && el.addEventListener('change', renderCatalog));
 });
+// Заміна в renderCartPage
+listEl.innerHTML = items.map(p => `
+  <div class="cart-item" data-id="${p.id}">
+    <input type="checkbox" class="pick" aria-label="Вибрати" checked>
+    <img src="${p.img}" alt="${p.name}">
+    <div>
+      <div class="name">${p.name}</div>
+      <div class="meta">${p.brand} • ${p.type}</div>
+      <div class="price">${formatUAH(p.price)}</div>
+    </div>
+    <div class="qty-control">
+      <button class="qty-minus">-</button>
+      <span class="qty">${p.qty}</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <div class="remove" role="button" tabindex="0">Прибрати</div>
+  </div>
+`).join('');
+
+// Логіка для +/-
+listEl.querySelectorAll('.qty-plus').forEach(btn => btn.addEventListener('click', e => {
+  const row = e.target.closest('.cart-item');
+  const id = Number(row.getAttribute('data-id'));
+  const cart = getCart();
+  const item = cart.find(x => x.id === id);
+  if (item) { item.qty++; saveCart(cart); }
+  row.querySelector('.qty').textContent = item.qty;
+  renderHeaderCount();
+  updateTotal();
+}));
+
+listEl.querySelectorAll('.qty-minus').forEach(btn => btn.addEventListener('click', e => {
+  const row = e.target.closest('.cart-item');
+  const id = Number(row.getAttribute('data-id'));
+  const cart = getCart();
+  const item = cart.find(x => x.id === id);
+  if (item && item.qty > 1) {
+    item.qty--; saveCart(cart);
+    row.querySelector('.qty').textContent = item.qty;
+    renderHeaderCount();
+    updateTotal();
+  }
+}));
+
